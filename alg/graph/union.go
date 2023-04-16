@@ -15,15 +15,16 @@ func NewUF(n int) *UF {
 	return &UF{parent, n}
 }
 
-func (u *UF) Union(p, q int) {
-	rootP := u.parent[p]
-	rootQ := u.parent[q]
+func (u *UF) Union(p, q int) bool {
+	rootP := u.Find(p)
+	rootQ := u.Find(q)
 	if rootP == rootQ {
-		return
+		return false
 	}
 
 	u.parent[rootQ] = rootP
 	u.count--
+	return true
 }
 
 func (u *UF) Find(x int) int {
